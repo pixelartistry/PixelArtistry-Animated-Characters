@@ -24,10 +24,10 @@ rem  FLUX.2 Klein base is under the FLUX Non-Commercial License; your
 rem  outputs are yours, but check bfl.ai/licensing before commercial use.
 rem ===================================================================
 
-rem -------- Pinned versions: the exact commits of the tested run (15 Oct 2026) --------
-set "PIN_DATE=2026-10-15"
+rem -------- Pinned versions: UltraTex modular v2.0.0 (20 Oct 2026); GGUF as tested 15 Oct --------
+set "PIN_DATE=2026-10-20"
 set "UTX_REPO=https://github.com/Mstafa-awad/UltraTex-ComfyUI-nodes"
-set "UTX_SHA=b98f4f45057a5a40561ffbb0770ef3a4e0400112"
+set "UTX_SHA=8d434a2104be520ea699a9baac2327d124387111"
 set "GGUF_REPO=https://github.com/city96/ComfyUI-GGUF"
 set "GGUF_SHA=4dfc025e4be06ba9c210bd1189546f7af67f445d"
 set "WT_URL=https://raw.githubusercontent.com/pixelartistry/PixelArtistry-Watertight-Meshes/main/watertightMeshes_win_installer.bat"

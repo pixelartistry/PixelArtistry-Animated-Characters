@@ -2,7 +2,7 @@
   "id": "37ba617d-ebb7-4b72-a147-67ddfa6bd7d8",
   "revision": 0,
   "last_node_id": 387,
-  "last_link_id": 1374,
+  "last_link_id": 1376,
   "nodes": [
     {
       "id": 91,
@@ -79,7 +79,7 @@
       ],
       "flags": {},
       "order": 1,
-      "mode": 0,
+      "mode": 2,
       "inputs": [],
       "outputs": [
         {
@@ -124,7 +124,7 @@
       ],
       "flags": {},
       "order": 2,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "samples",
@@ -217,7 +217,7 @@
       ],
       "flags": {},
       "order": 4,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "model",
@@ -1647,7 +1647,7 @@
       ],
       "flags": {},
       "order": 31,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "positive",
@@ -2424,7 +2424,8 @@
           "type": "MESH",
           "links": [
             1302,
-            1312
+            1312,
+            1375
           ]
         }
       ],
@@ -2489,7 +2490,7 @@
       ],
       "flags": {},
       "order": 49,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "mesh",
@@ -2533,7 +2534,7 @@
       ],
       "flags": {},
       "order": 50,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "mesh",
@@ -2598,7 +2599,7 @@
       ],
       "flags": {},
       "order": 51,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "mesh",
@@ -2639,9 +2640,7 @@
         {
           "name": "mesh",
           "type": "MESH",
-          "links": [
-            1310
-          ]
+          "links": []
         }
       ],
       "properties": {
@@ -2669,7 +2668,7 @@
         {
           "name": "mesh",
           "type": "MESH",
-          "link": 1310
+          "link": 1375
         }
       ],
       "outputs": [
@@ -2687,7 +2686,7 @@
         "ver": "0.33.0",
         "Node name for S&R": "MeshToFile3D"
       },
-      "title": "Mesh → GLB"
+      "title": "High-poly → GLB (untextured, for Bake Forger)"
     },
     {
       "id": 334,
@@ -2702,7 +2701,7 @@
       ],
       "flags": {},
       "order": 53,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "model_3d",
@@ -2795,7 +2794,8 @@
           "name": "mesh",
           "type": "MESH",
           "links": [
-            1314
+            1314,
+            1376
           ]
         }
       ],
@@ -2836,7 +2836,7 @@
       ],
       "flags": {},
       "order": 55,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "mesh",
@@ -2853,9 +2853,7 @@
         {
           "name": "mesh",
           "type": "MESH",
-          "links": [
-            1316
-          ]
+          "links": []
         }
       ],
       "properties": {
@@ -2883,7 +2881,7 @@
         {
           "name": "mesh",
           "type": "MESH",
-          "link": 1316
+          "link": 1376
         }
       ],
       "outputs": [
@@ -3142,15 +3140,15 @@
         1,
         true,
         2048,
-        true,
+        false,
         2048,
-        true,
+        false,
         2048,
-        true,
+        false,
         2048,
-        true,
+        false,
         2048,
-        true,
+        false,
         2048,
         false,
         true,
@@ -3174,7 +3172,7 @@
         0.5,
         true
       ],
-      "title": "B · Bake Forger (normal, AO, emission → kept in final)"
+      "title": "B · Bake Forger (normal map only; colour + metal/rough come from UltraTex)"
     },
     {
       "id": 342,
@@ -3306,7 +3304,7 @@
       ],
       "flags": {},
       "order": 63,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "images",
@@ -3376,7 +3374,7 @@
       ],
       "flags": {},
       "order": 65,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "images",
@@ -3411,7 +3409,7 @@
       ],
       "flags": {},
       "order": 66,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "images",
@@ -3446,7 +3444,7 @@
       ],
       "flags": {},
       "order": 67,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "images",
@@ -3481,7 +3479,7 @@
       ],
       "flags": {},
       "order": 68,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "images",
@@ -3548,7 +3546,7 @@
       "title": "PixelArtistry · Start here",
       "properties": {},
       "widgets_values": [
-        "# PixelArtistry · 05p Image → Game-ready Prop (low-poly + UltraTex)\n\nThe prop version of workflow 05, used for the sword in the video: same chain, tuned for hard-surface props. Output `output/3d/PixelArtistry_sword_final_*.glb`.\n\nTo give a character a weapon for ActionForge: put the prop into the character's hand in Blender, keep it a **separate object**, export both as one GLB, and tag the prop piece as **prop** in ActionForge's rigger.\n\n## Before the first run\n1. Run the installer from https://github.com/pixelartistry/PixelArtistry-Animated-Characters (it fills in the Blender path).\n2. **UltraTex scratch folder** node: set `spill_directory` to a drive with free space.\n3. Load your prop image: the whole object, straight front view, plain background.\n\n---\n\n# PixelArtistry · Image → Game-Ready 3D Asset\n\nFree & local ComfyUI workflow by **PixelArtistry**.\n\n## How to use\n1. Load your image in **Load Image** (green group).\n2. Set your Blender path once in **Blender path** (purple group 1).\n3. Choose the model with **Boolean (Switch to Trellis2)**: `false` = Pixal3D, `true` = Trellis.2\n4. Set **LODTailor (A)** `target_tris`: 20–30k for characters, 500–1,000 for props.\n5. Press **Run**.\n\n## What happens\nPixal3D / Trellis.2 generate shape + texture → **Quad Reconstruct → WTiVo → LODTailor** make a watertight high-poly → it gets its textures (`PixelArtistry_highpoly`) → **LODTailor** builds the low-poly → **Bake Forger** bakes all maps onto it → **Fast Merge** welds duplicate vertices without breaking the UVs (`PixelArtistry_lowpoly`).\n\nBoth files land in `ComfyUI/output/3d/`.\n\n## PixelArtistry\n- Website: https://pixel-artistry.com\n- YouTube: https://www.youtube.com/@PixelArtistry_\n- X: https://x.com/philippsieben\n- Newsletter FutureFrames: https://go.pixel-artistry.com/newsletter\n\n## Built with MostAadTech's nodes\nThe watertight, low-poly and baking steps in this workflow run on free, open-source ComfyUI nodes by **MostAadTech**. He spent over a month building them and was a huge help while these workflows were made – please show him some love:\n\n- **Quad Reconstruct** – cleans the raw mesh and removes floating fragments\n- **Memory Cleaner** – frees VRAM between the heavy steps\n- **WTiVo** – makes the mesh watertight\n- **LODTailor** – builds the lighter or low-poly mesh in Blender\n- **Bake Forger** – bakes the high-poly maps onto the low-poly\n- **Fast Merge** – welds duplicate vertices for a clean final file\n\n**Follow & support MostAadTech**\n- YouTube: https://www.youtube.com/@MostAadTech\n- Patreon: https://www.patreon.com/cw/MostafaAwad/membership\n- GitHub: https://github.com/Mstafa-awad\n- X: https://x.com/MostAadTech\n\n---\n\nWorkflow built on ComfyUI's official Pixal3D / Trellis.2 template (MIT, © Comfy Org)."
+        "# PixelArtistry · 05p Image → Game-ready Prop (low-poly + UltraTex)\n\n**Texture stage is OFF.** The TRELLIS/Pixal3D texture nodes are muted (grey), because UltraTex paints colour and metal/roughness anyway. Bake Forger only bakes the normal map. Saves a few minutes and about 100 MB per run. To get the old textured high-poly back, unmute the grey nodes and reconnect *Apply textures* → *High-poly → GLB* and *Vertex colors* → *Unwrap UVs (low-poly)*.\n\nThe prop version of workflow 05, used for the sword in the video: same chain, tuned for hard-surface props. Output `output/3d/PixelArtistry_sword_final_*.glb`.\n\nTo give a character a weapon for ActionForge: put the prop into the character's hand in Blender, keep it a **separate object**, export both as one GLB, and tag the prop piece as **prop** in ActionForge's rigger.\n\n## Before the first run\n1. Run the installer from https://github.com/pixelartistry/PixelArtistry-Animated-Characters (it fills in the Blender path).\n2. **UltraTex scratch folder** node: set `spill_directory` to a drive with free space.\n3. Load your prop image: the whole object, straight front view, plain background.\n\n---\n\n# PixelArtistry · Image → Game-Ready 3D Asset\n\nFree & local ComfyUI workflow by **PixelArtistry**.\n\n## How to use\n1. Load your image in **Load Image** (green group).\n2. Set your Blender path once in **Blender path** (purple group 1).\n3. Choose the model with **Boolean (Switch to Trellis2)**: `false` = Pixal3D, `true` = Trellis.2\n4. Set **LODTailor (A)** `target_tris`: 20–30k for characters, 500–1,000 for props.\n5. Press **Run**.\n\n## What happens\nPixal3D / Trellis.2 generate shape + texture → **Quad Reconstruct → WTiVo → LODTailor** make a watertight high-poly → it gets its textures (`PixelArtistry_highpoly`) → **LODTailor** builds the low-poly → **Bake Forger** bakes all maps onto it → **Fast Merge** welds duplicate vertices without breaking the UVs (`PixelArtistry_lowpoly`).\n\nBoth files land in `ComfyUI/output/3d/`.\n\n## PixelArtistry\n- Website: https://pixel-artistry.com\n- YouTube: https://www.youtube.com/@PixelArtistry_\n- X: https://x.com/philippsieben\n- Newsletter FutureFrames: https://go.pixel-artistry.com/newsletter\n\n## Built with MostAadTech's nodes\nThe watertight, low-poly and baking steps in this workflow run on free, open-source ComfyUI nodes by **MostAadTech**. He spent over a month building them and was a huge help while these workflows were made – please show him some love:\n\n- **Quad Reconstruct** – cleans the raw mesh and removes floating fragments\n- **Memory Cleaner** – frees VRAM between the heavy steps\n- **WTiVo** – makes the mesh watertight\n- **LODTailor** – builds the lighter or low-poly mesh in Blender\n- **Bake Forger** – bakes the high-poly maps onto the low-poly\n- **Fast Merge** – welds duplicate vertices for a clean final file\n\n**Follow & support MostAadTech**\n- YouTube: https://www.youtube.com/@MostAadTech\n- Patreon: https://www.patreon.com/cw/MostafaAwad/membership\n- GitHub: https://github.com/Mstafa-awad\n- X: https://x.com/MostAadTech\n\n---\n\nWorkflow built on ComfyUI's official Pixal3D / Trellis.2 template (MIT, © Comfy Org)."
       ]
     },
     {
@@ -4638,7 +4636,12 @@
       "widgets_values": [
         "front",
         "foreground",
-        "auto_smooth"
+        "auto_smooth",
+        1024,
+        "native_mesh_fit",
+        0.0,
+        0,
+        1.0
       ],
       "widgets_values_named": {
         "alignment": "front",
@@ -4694,7 +4697,7 @@
     },
     {
       "id": 377,
-      "type": "UTXBakeTextureV26",
+      "type": "UTXFastSurfaceTextureBaker",
       "pos": [
         7220,
         880
@@ -4732,10 +4735,17 @@
       ],
       "outputs": [
         {
-          "name": "MESH",
+          "name": "mesh",
           "type": "MESH",
           "links": [
             1359
+          ]
+        },
+        {
+          "name": "glb",
+          "type": "FILE_3D_GLB",
+          "links": [
+            1363
           ]
         },
         {
@@ -4763,38 +4773,32 @@
           ]
         },
         {
-          "name": "FILE_3D_GLB",
-          "type": "FILE_3D_GLB",
-          "links": [
-            1363
-          ]
-        },
-        {
-          "name": "unseen_before_fill",
+          "name": "observed_coverage",
           "type": "MASK",
           "links": []
         },
         {
-          "name": "projection_confidence",
-          "type": "MASK",
+          "name": "report",
+          "type": "STRING",
           "links": []
         }
       ],
       "properties": {
-        "Node name for S&R": "UTXBakeTextureV26"
+        "Node name for S&R": "UTXFastSurfaceTextureBaker"
       },
       "widgets_values": [
         2048,
-        true,
-        "detail_preserving",
-        "normal_aware_surface"
+        "surface_fill",
+        "fast_detail",
+        "auto"
       ],
       "widgets_values_named": {
         "texture_size": 4096,
         "fill_unseen": true,
         "blend_mode": "detail_preserving",
         "repair_mode": "normal_aware_surface"
-      }
+      },
+      "title": "3. Fast Surface Texture Baker (UltraTex v2)"
     },
     {
       "id": 378,
@@ -5929,14 +5933,6 @@
       "IMAGE"
     ],
     [
-      1310,
-      332,
-      0,
-      333,
-      0,
-      "MESH"
-    ],
-    [
       1311,
       333,
       0,
@@ -5975,14 +5971,6 @@
       336,
       1,
       "VOXEL"
-    ],
-    [
-      1316,
-      336,
-      0,
-      337,
-      0,
-      "MESH"
     ],
     [
       1317,
@@ -6323,7 +6311,7 @@
     [
       1360,
       377,
-      1,
+      2,
       362,
       0,
       "IMAGE"
@@ -6331,7 +6319,7 @@
     [
       1361,
       377,
-      3,
+      4,
       367,
       0,
       "IMAGE"
@@ -6339,7 +6327,7 @@
     [
       1362,
       377,
-      2,
+      3,
       366,
       0,
       "IMAGE"
@@ -6347,7 +6335,7 @@
     [
       1363,
       377,
-      4,
+      1,
       378,
       0,
       "FILE_3D_GLB"
@@ -6395,7 +6383,7 @@
     [
       1369,
       377,
-      1,
+      2,
       384,
       1,
       "IMAGE"
@@ -6403,7 +6391,7 @@
     [
       1370,
       377,
-      2,
+      3,
       384,
       2,
       "IMAGE"
@@ -6411,7 +6399,7 @@
     [
       1371,
       377,
-      3,
+      4,
       384,
       3,
       "IMAGE"
@@ -6439,6 +6427,22 @@
       375,
       3,
       "UTX_RUNTIME_POLICY"
+    ],
+    [
+      1375,
+      328,
+      0,
+      333,
+      0,
+      "MESH"
+    ],
+    [
+      1376,
+      335,
+      0,
+      337,
+      0,
+      "MESH"
     ]
   ],
   "groups": [
@@ -6468,7 +6472,7 @@
     },
     {
       "id": 3,
-      "title": "Texture Generation",
+      "title": "Texture Generation (OFF: UltraTex textures the mesh)",
       "bounding": [
         520,
         840,
@@ -6565,7 +6569,7 @@
     },
     {
       "id": 19,
-      "title": "PixelArtistry · 2 Textured High-Poly",
+      "title": "PixelArtistry · 2 High-Poly (texture bake OFF)",
       "bounding": [
         2760,
         -210,

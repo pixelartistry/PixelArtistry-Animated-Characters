@@ -15,7 +15,7 @@ Image ──► Pixal3D / TRELLIS.2 ──► WTiVo watertight ──► LODTail
 | **PixelArtistry_05_Image_to_LowPoly_Character_UltraTex** | Characters: 12k triangles, 2K maps | `output/3d/PixelArtistry_char_final_*.glb` |
 | **PixelArtistry_05p_Image_to_LowPoly_Prop_UltraTex** | Props and weapons: 2k triangles, hard-surface bake | `output/3d/PixelArtistry_sword_final_*.glb` |
 
-Both run in one click: Pixal3D (or TRELLIS.2, one switch) builds the shape, MostAadTech's **WTiVo** makes it watertight, **LODTailor** rebuilds it as a low-poly game mesh, **Bake Forger** bakes the high-poly detail into a normal map, and **UltraTex** (MostAadTech's low-VRAM GGUF version) paints the colour and metal/roughness again straight from your image, on the same UVs. **Apply Materials** merges everything into one GLB.
+Both run in one click: Pixal3D (or TRELLIS.2, one switch) builds the shape (their own texture stage is switched off, since UltraTex textures the mesh), MostAadTech's **WTiVo** makes it watertight, **LODTailor** rebuilds it as a low-poly game mesh, **Bake Forger** bakes the high-poly detail into a normal map, and **UltraTex** (MostAadTech's low-VRAM GGUF version) paints the colour and metal/roughness again straight from your image, on the same UVs. **Apply Materials** merges everything into one GLB.
 
 ## Requirements
 
@@ -61,7 +61,7 @@ Safe to run again: existing files are kept, downloads resume, and an existing wo
 | [Mstafa-awad/LODTailor-The-Mesh-Trimmer-ComfyuiNode](https://github.com/Mstafa-awad/LODTailor-The-Mesh-Trimmer-ComfyuiNode) | `3d25b7d` |
 | [Mstafa-awad/LODTailor-Bake-Forger](https://github.com/Mstafa-awad/LODTailor-Bake-Forger) | `f13589c` |
 | [Mstafa-awad/WTiVo-FastMergeByDistance](https://github.com/Mstafa-awad/WTiVo-FastMergeByDistance) | `5392949` |
-| [Mstafa-awad/UltraTex-ComfyUI-nodes](https://github.com/Mstafa-awad/UltraTex-ComfyUI-nodes) → folder `comfyui_ultratex_modular` | `b98f4f4` |
+| [Mstafa-awad/UltraTex-ComfyUI-nodes](https://github.com/Mstafa-awad/UltraTex-ComfyUI-nodes) → folder `comfyui_ultratex_modular` | `8d434a2` (v2.0.0) |
 | [city96/ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) | `4dfc025` |
 | [visualbruno/ComfyUI-Trellis2](https://github.com/visualbruno/ComfyUI-Trellis2) – provides the CuMesh wheels for Quad Reconstruct | `1459741` |
 
@@ -108,8 +108,11 @@ Both LoRAs are called `dit_lora.safetensors` on ModelScope – rename each one r
 | Bake Forger maps | 2048 | 2048 | |
 | Bake Forger `tight_cage_extrusion_factor` | 0.0019 | 0.019 | characters vs hard-surface; raise it if white patches appear |
 | UltraTex steps | 4 | 4 | fast; 25 for final quality – mostly worth it on the metal/rough pass |
-| UltraTex views | 12 colour (6 + guided 45°), 6 metal/rough | same | 1024 view resolution, 2048 texture |
+| UltraTex views | 12 colour (guided extra angles), 6 metal/rough | same | 1024 view resolution. UltraTex v2 also offers **10** (6 canonical + 4 guided diagonals, all real views) |
 | UltraTex UVs | `keep_existing` | same | keeps the UltraTex maps aligned with the baked normal map |
+| UltraTex bake (v2) | Fast Surface Texture Baker, 2048, `surface_fill`, `fast_detail` | same | replaces the v0.2 bake node |
+| UltraTex camera (v2) | `native_mesh_fit`, 0 % margin, 0 px padding | same | 0/0 gave better results than the v2 defaults (2 % / 8 px) |
+| TRELLIS / Pixal3D texture stage | off (muted) | off (muted) | UltraTex paints colour and metal/rough anyway; Bake Forger bakes the normal map only. Saves ~2 min and ~100 MB per run |
 | Structure seed | 56, fixed | 56, fixed | change it for a different generation |
 | UltraTex scratch folder | blank → `output/.ultratex_cache` | same | **point it to a drive with space** |
 
@@ -117,7 +120,7 @@ Both LoRAs are called `dit_lora.safetensors` on ModelScope – rename each one r
 
 RTX 5080 16 GB, ComfyUI 0.39.2, Pixal3D, UltraTex 4 steps:
 
-- **Character (05):** 705 s for the full run → 11,976 triangles, colour + metal/rough from UltraTex, normal map from Bake Forger.
+- **Character (05):** 572 s for the full run (UltraTex v2, texture stage off) → 11,976 triangles, colour + metal/rough from UltraTex, normal map from Bake Forger. The earlier version with the texture stage on took 705 s.
 - **Prop (05p), a sword:** 463 s → 2,000 triangles.
 
 ## Troubleshooting
