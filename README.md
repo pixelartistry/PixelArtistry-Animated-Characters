@@ -61,7 +61,7 @@ Safe to run again: existing files are kept, downloads resume, and an existing wo
 | [Mstafa-awad/LODTailor-The-Mesh-Trimmer-ComfyuiNode](https://github.com/Mstafa-awad/LODTailor-The-Mesh-Trimmer-ComfyuiNode) | `3d25b7d` |
 | [Mstafa-awad/LODTailor-Bake-Forger](https://github.com/Mstafa-awad/LODTailor-Bake-Forger) | `f13589c` |
 | [Mstafa-awad/WTiVo-FastMergeByDistance](https://github.com/Mstafa-awad/WTiVo-FastMergeByDistance) | `5392949` |
-| [Mstafa-awad/UltraTex-ComfyUI-nodes](https://github.com/Mstafa-awad/UltraTex-ComfyUI-nodes) → folder `comfyui_ultratex_modular` | `8d434a2` (v2.0.0) |
+| [Mstafa-awad/UltraTex-ComfyUI-nodes](https://github.com/Mstafa-awad/UltraTex-ComfyUI-nodes) → folder `comfyui_ultratex_modular` | `4dea3ff` (2.2.0rc2) |
 | [city96/ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) | `4dfc025` |
 | [visualbruno/ComfyUI-Trellis2](https://github.com/visualbruno/ComfyUI-Trellis2) – provides the CuMesh wheels for Quad Reconstruct | `1459741` |
 
@@ -92,12 +92,14 @@ Both LoRAs are called `dit_lora.safetensors` on ModelScope – rename each one r
 ## How to use
 
 1. Open **Workflows → PixelArtistry → PixelArtistry_05_Image_to_LowPoly_Character_UltraTex**.
-2. Set the **UltraTex scratch folder** node (`spill_directory`) to a drive with free space.
+2. Make sure the ComfyUI drive has a few GB free for UltraTex's scratch files (the Cache Cleaner removes them after each run).
 3. Load your image in **Load Image**: the full character, straight front view, **T-pose**, **empty hands**, plain background. Fitted clothing animates best – big shoulder armour stretches when the arms move.
 4. Choose Pixal3D (`false`, default) or TRELLIS.2 (`true`) with **Boolean (Switch to Trellis2)**.
 5. Press **Run**. The final GLB lands in `ComfyUI/output/3d/`.
 
 **Next steps used in the video:** load the GLB into ActionForge as **+ Unrigged model**, place the joint dots, play the free CC0 animations by Quaternius and export them with the character. A weapon from workflow 05p goes into the character's hand in Blender as a **separate object** and is tagged as **prop** in ActionForge, so it stays rigid in the hand.
+
+**Make it playable in Godot:** paste [docs/godot-ai-guide.md](docs/godot-ai-guide.md) into Claude (or another AI assistant) and ask it to help you set up your character step by step. It covers the player scene, a test level and the training dummies, and contains the full scripts (run, jump, three sword attacks with root motion). Tested on Godot 4.7.
 
 ## Settings
 
@@ -110,11 +112,12 @@ Both LoRAs are called `dit_lora.safetensors` on ModelScope – rename each one r
 | UltraTex steps | 4 | 4 | fast; 25 for final quality – mostly worth it on the metal/rough pass |
 | UltraTex views | 12 colour (guided extra angles), 6 metal/rough | same | 1024 view resolution. UltraTex v2 also offers **10** (6 canonical + 4 guided diagonals, all real views) |
 | UltraTex UVs | `keep_existing` | same | keeps the UltraTex maps aligned with the baked normal map |
-| UltraTex bake (v2) | Fast Surface Texture Baker, 2048, `surface_fill`, `fast_detail` | same | replaces the v0.2 bake node |
+| UltraTex bake | Fast Surface Texture Baker, 2048, `surface_fill`, **`sharp_anchor_v2`** | same | the sharper bake mode added in UltraTex 2.2 |
+| UltraTex Cache Cleaner | after the final GLB, `delete_when_executed` | same | empties `output/.ultratex_cache` after every run |
 | UltraTex camera (v2) | `native_mesh_fit`, 0 % margin, 0 px padding | same | 0/0 gave better results than the v2 defaults (2 % / 8 px) |
 | TRELLIS / Pixal3D texture stage | off (muted) | off (muted) | UltraTex paints colour and metal/rough anyway; Bake Forger bakes the normal map only. Saves ~2 min and ~100 MB per run |
 | Structure seed | 56, fixed | 56, fixed | change it for a different generation |
-| UltraTex scratch folder | blank → `output/.ultratex_cache` | same | **point it to a drive with space** |
+| UltraTex scratch folder | blank → `output/.ultratex_cache` | same | needs a few GB free during a run; the Cache Cleaner empties it afterwards. If you point it elsewhere, the cleaner can't clean it |
 
 ## My measured results
 
@@ -127,7 +130,7 @@ RTX 5080 16 GB, ComfyUI 0.39.2, Pixal3D, UltraTex 4 steps:
 
 | You see | Fix |
 |---|---|
-| `OSError: [Errno 28] No space left on device` in an UltraTex node | UltraTex writes several GB of scratch files per run and never deletes them. Point the **UltraTex scratch folder** node to a drive with space, and empty that folder now and then. |
+| `OSError: [Errno 28] No space left on device` in an UltraTex node | UltraTex needs several GB of scratch space during a run. Free some space on the ComfyUI drive (the Cache Cleaner empties `output/.ultratex_cache` after each run), or point the **UltraTex scratch folder** node to another drive and empty that folder yourself. |
 | `UltraTex spill budget reached` | Raise `disk_budget_gb` in the UltraTex scratch folder node (default 16) or free that drive. |
 | The installer says WTiVo will not load | WTiVo needs Python 3.12 + PyTorch 2.8 + CUDA 12 – see [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md). |
 | LODTailor / Bake Forger: `WinError 2` | The Blender path is wrong or uses single backslashes – use forward slashes. |

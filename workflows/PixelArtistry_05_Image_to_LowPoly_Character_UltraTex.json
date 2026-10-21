@@ -1,8 +1,8 @@
 {
   "id": "37ba617d-ebb7-4b72-a147-67ddfa6bd7d8",
   "revision": 0,
-  "last_node_id": 387,
-  "last_link_id": 1376,
+  "last_node_id": 388,
+  "last_link_id": 1377,
   "nodes": [
     {
       "id": 91,
@@ -3546,7 +3546,7 @@
       "title": "PixelArtistry · Start here",
       "properties": {},
       "widgets_values": [
-        "# PixelArtistry · 05 Image → Animated-ready Character (low-poly + UltraTex)\n\n**Texture stage is OFF.** The TRELLIS/Pixal3D texture nodes are muted (grey), because UltraTex paints colour and metal/roughness anyway. Bake Forger only bakes the normal map. Saves a few minutes and about 100 MB per run. To get the old textured high-poly back, unmute the grey nodes and reconnect *Apply textures* → *High-poly → GLB* and *Vertex colors* → *Unwrap UVs (low-poly)*.\n\nOne image in, one game-ready character out: Pixal3D / TRELLIS.2 → watertight high-poly → **12k-triangle low-poly** → **Bake Forger** (normal map) → **UltraTex** (MostAadTech, low-VRAM GGUF) repaints colour + metallic/roughness from your image on the same UVs → **Apply Materials** merges both → `output/3d/PixelArtistry_char_final_*.glb`.\n\nNext: rig and animate it in ActionForge (+ Unrigged model), then use it in your game engine.\n\n## Before the first run\n1. Run the installer from https://github.com/pixelartistry/PixelArtistry-Animated-Characters (it fills in the Blender path).\n2. **UltraTex scratch folder** node: set `spill_directory` to a drive with free space. Blank = `ComfyUI/output/.ultratex_cache`. UltraTex writes several GB per run and never deletes them.\n3. Load your image in **Load Image**: front view, T-pose, empty hands, plain background.\n4. Press Run.\n\n---\n\n# PixelArtistry · Image → Game-Ready 3D Asset\n\nFree & local ComfyUI workflow by **PixelArtistry**.\n\n## How to use\n1. Load your image in **Load Image** (green group).\n2. Set your Blender path once in **Blender path** (purple group 1).\n3. Choose the model with **Boolean (Switch to Trellis2)**: `false` = Pixal3D, `true` = Trellis.2\n4. Set **LODTailor (A)** `target_tris`: 20–30k for characters, 500–1,000 for props.\n5. Press **Run**.\n\n## What happens\nPixal3D / Trellis.2 generate shape + texture → **Quad Reconstruct → WTiVo → LODTailor** make a watertight high-poly → it gets its textures (`PixelArtistry_highpoly`) → **LODTailor** builds the low-poly → **Bake Forger** bakes all maps onto it → **Fast Merge** welds duplicate vertices without breaking the UVs (`PixelArtistry_lowpoly`).\n\nBoth files land in `ComfyUI/output/3d/`.\n\n## PixelArtistry\n- Website: https://pixel-artistry.com\n- YouTube: https://www.youtube.com/@PixelArtistry_\n- X: https://x.com/philippsieben\n- Newsletter FutureFrames: https://go.pixel-artistry.com/newsletter\n\n## Built with MostAadTech's nodes\nThe watertight, low-poly and baking steps in this workflow run on free, open-source ComfyUI nodes by **MostAadTech**. He spent over a month building them and was a huge help while these workflows were made – please show him some love:\n\n- **Quad Reconstruct** – cleans the raw mesh and removes floating fragments\n- **Memory Cleaner** – frees VRAM between the heavy steps\n- **WTiVo** – makes the mesh watertight\n- **LODTailor** – builds the lighter or low-poly mesh in Blender\n- **Bake Forger** – bakes the high-poly maps onto the low-poly\n- **Fast Merge** – welds duplicate vertices for a clean final file\n\n**Follow & support MostAadTech**\n- YouTube: https://www.youtube.com/@MostAadTech\n- Patreon: https://www.patreon.com/cw/MostafaAwad/membership\n- GitHub: https://github.com/Mstafa-awad\n- X: https://x.com/MostAadTech\n\n---\n\nWorkflow built on ComfyUI's official Pixal3D / Trellis.2 template (MIT, © Comfy Org)."
+        "# PixelArtistry · 05 Image → Animated-ready Character (low-poly + UltraTex)\n\n**Texture stage is OFF.** The TRELLIS/Pixal3D texture nodes are muted (grey), because UltraTex paints colour and metal/roughness anyway. Bake Forger only bakes the normal map. Saves a few minutes and about 100 MB per run. To get the old textured high-poly back, unmute the grey nodes and reconnect *Apply textures* → *High-poly → GLB* and *Vertex colors* → *Unwrap UVs (low-poly)*.\n\nOne image in, one game-ready character out: Pixal3D / TRELLIS.2 → watertight high-poly → **12k-triangle low-poly** → **Bake Forger** (normal map) → **UltraTex** (MostAadTech, low-VRAM GGUF) repaints colour + metallic/roughness from your image on the same UVs → **Apply Materials** merges both → `output/3d/PixelArtistry_char_final_*.glb`.\n\nNext: rig and animate it in ActionForge (+ Unrigged model), then use it in your game engine.\n\n## Before the first run\n1. Run the installer from https://github.com/pixelartistry/PixelArtistry-Animated-Characters (it fills in the Blender path).\n2. Keep a few GB free on the ComfyUI drive for UltraTex's scratch files. The **Cache Cleaner** node empties `ComfyUI/output/.ultratex_cache` after every run (if you point `spill_directory` in the **UltraTex scratch folder** node to another drive, empty that folder yourself).\n3. Load your image in **Load Image**: front view, T-pose, empty hands, plain background.\n4. Press Run.\n\n---\n\n# PixelArtistry · Image → Game-Ready 3D Asset\n\nFree & local ComfyUI workflow by **PixelArtistry**.\n\n## How to use\n1. Load your image in **Load Image** (green group).\n2. Set your Blender path once in **Blender path** (purple group 1).\n3. Choose the model with **Boolean (Switch to Trellis2)**: `false` = Pixal3D, `true` = Trellis.2\n4. Set **LODTailor (A)** `target_tris`: 20–30k for characters, 500–1,000 for props.\n5. Press **Run**.\n\n## What happens\nPixal3D / Trellis.2 generate shape + texture → **Quad Reconstruct → WTiVo → LODTailor** make a watertight high-poly → it gets its textures (`PixelArtistry_highpoly`) → **LODTailor** builds the low-poly → **Bake Forger** bakes all maps onto it → **Fast Merge** welds duplicate vertices without breaking the UVs (`PixelArtistry_lowpoly`).\n\nBoth files land in `ComfyUI/output/3d/`.\n\n## PixelArtistry\n- Website: https://pixel-artistry.com\n- YouTube: https://www.youtube.com/@PixelArtistry_\n- X: https://x.com/philippsieben\n- Newsletter FutureFrames: https://go.pixel-artistry.com/newsletter\n\n## Built with MostAadTech's nodes\nThe watertight, low-poly and baking steps in this workflow run on free, open-source ComfyUI nodes by **MostAadTech**. He spent over a month building them and was a huge help while these workflows were made – please show him some love:\n\n- **Quad Reconstruct** – cleans the raw mesh and removes floating fragments\n- **Memory Cleaner** – frees VRAM between the heavy steps\n- **WTiVo** – makes the mesh watertight\n- **LODTailor** – builds the lighter or low-poly mesh in Blender\n- **Bake Forger** – bakes the high-poly maps onto the low-poly\n- **Fast Merge** – welds duplicate vertices for a clean final file\n\n**Follow & support MostAadTech**\n- YouTube: https://www.youtube.com/@MostAadTech\n- Patreon: https://www.patreon.com/cw/MostafaAwad/membership\n- GitHub: https://github.com/Mstafa-awad\n- X: https://x.com/MostAadTech\n\n---\n\nWorkflow built on ComfyUI's official Pixal3D / Trellis.2 template (MIT, © Comfy Org)."
       ]
     },
     {
@@ -4789,7 +4789,7 @@
       "widgets_values": [
         2048,
         "surface_fill",
-        "fast_detail",
+        "sharp_anchor_v2",
         "auto"
       ],
       "widgets_values_named": {
@@ -4798,7 +4798,7 @@
         "blend_mode": "detail_preserving",
         "repair_mode": "normal_aware_surface"
       },
-      "title": "3. Fast Surface Texture Baker (UltraTex v2)"
+      "title": "3. Fast Surface Texture Baker (UltraTex 2.2, sharp_anchor_v2)"
     },
     {
       "id": 378,
@@ -5213,7 +5213,7 @@
         {
           "name": "model_3d",
           "type": "FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D",
-          "link": 1373
+          "link": 1377
         }
       ],
       "outputs": [
@@ -5267,7 +5267,7 @@
       "flags": {},
       "order": 0,
       "mode": 0,
-      "title": "UltraTex scratch folder (spill_directory) – set a drive with free space; blank = output/.ultratex_cache",
+      "title": "UltraTex scratch folder (blank = output/.ultratex_cache, emptied by the Cache Cleaner after each run)",
       "inputs": [],
       "outputs": [
         {
@@ -5296,6 +5296,56 @@
         12.0,
         512,
         64
+      ]
+    },
+    {
+      "id": 388,
+      "type": "UTXCacheCleaner",
+      "pos": [
+        7720,
+        1360
+      ],
+      "size": [
+        340,
+        160
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "title": "UTX 4 · Cache Cleaner (empties output/.ultratex_cache after the run)",
+      "inputs": [
+        {
+          "name": "passthrough",
+          "type": "FILE_3D_GLB",
+          "shape": 7,
+          "link": 1373
+        }
+      ],
+      "outputs": [
+        {
+          "name": "passthrough",
+          "type": "FILE_3D_GLB",
+          "links": [
+            1377
+          ]
+        },
+        {
+          "name": "cache_size",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "cleanup_report",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UTXCacheCleaner"
+      },
+      "widgets_values": [
+        "delete_when_executed",
+        true
       ]
     }
   ],
@@ -6416,7 +6466,7 @@
       1373,
       385,
       0,
-      386,
+      388,
       0,
       "FILE_3D_GLB"
     ],
@@ -6443,6 +6493,14 @@
       337,
       0,
       "MESH"
+    ],
+    [
+      1377,
+      388,
+      0,
+      386,
+      0,
+      "FILE_3D_GLB"
     ]
   ],
   "groups": [
